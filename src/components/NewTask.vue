@@ -82,6 +82,8 @@ export default {
         method: 'POST',
         data: this.form
       })
+      this.$router.push
+      
     }
   }
 };

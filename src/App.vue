@@ -83,10 +83,15 @@ export default {
             method: 'GET'
           })
         }
-      }
+        if (column.title === 'Todo') {
+          await axios({
+            url: `api/moveTask/${event.added.element._id}/todo`,
+            method: 'GET'
+          })
+        }
     }
   }
-};
+  }}
 </script>
 
 <style scoped>
