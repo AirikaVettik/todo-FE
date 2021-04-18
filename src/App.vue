@@ -62,18 +62,12 @@ export default {
   },
   methods: {
     async getTasks () {
-      const resTodo = await axios({
-        url: 'api/todo-tasks',
+      const getAllTasks = await axios({
+        url: 'api/all-tasks',
         method: 'GET'
       })
-
-      const resDone = await axios({
-        url: 'api/done-tasks',
-        method: 'GET'
-      })
-
-      this.columns.push(resTodo.data[0])
-      this.columns.push(resDone.data[0])
+      this.columns.push(getAllTasks.data[0])
+      this.columns.push(getAllTasks.data[1])
     },
     async moveTask (event, column) {
       if (event.added) {
