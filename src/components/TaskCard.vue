@@ -19,7 +19,7 @@ export default {
   props: {
     task: {
       priority: Object,
-      default: () => ({})
+      default: () => ({}),
     }
   },
   computed: {

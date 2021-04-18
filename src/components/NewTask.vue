@@ -29,8 +29,7 @@
       <div class="col">
         <div class="inline-block w-2 h-2 rounded-full mr-2" :class="'bg-' + form.color.toLowerCase() + '-400'" />
         <label for="color" class="inline-block text-sm font-medium text-gray-700">Color</label>
-
-        <select name="color" class="mt-1 block w-full border-gray p-1">
+        <select name="color" v-model="form.color" class="mt-1 block w-full border-gray p-1">
           <option value="GRAY">Gray</option>
           <option value="BLUE">Blue</option>
           <option value="INDIGO">Indigo</option>
@@ -67,12 +66,12 @@ export default {
   computed: {
     priorityColor() {
       const mappings = {
-        High: "red",
-        Medium: "yellow",
-        Low: "green",
+        HIGH: "red",
+        MEDIUM: "yellow",
+        LOW: "green",
         default: "teal"
       };
-      return mappings[this.form.priority] || mappings.default;
+      return mappings [this.form.priority] || mappings.default;
     },
     getDateStr(){
          return new Date().toLocaleDateString('en-GB', {day: "numeric" ,month: "long", year: "numeric",});
