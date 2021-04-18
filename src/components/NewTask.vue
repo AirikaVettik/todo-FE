@@ -85,11 +85,11 @@ export default {
         method: 'POST',
         data: this.form
       })
-      this.$router.push
-      
-    }
+      .then(() => {
+        window.location.reload()
+      })
   }
-};
+}}
 </script>
 <style scoped>
   .border-gray {
