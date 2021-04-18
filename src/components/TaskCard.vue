@@ -4,8 +4,8 @@
       <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">{{ task.title }}</p>
     </div>
     <div class="flex mt-4 justify-between items-center">
-      <span class="text-sm text-gray-600">{{ task.date }}</span>
-      <badge v-if="task.priority" :color="badgeColor"><span>{{ task.priority }}</span></badge>
+      <span class="text-sm text-gray-600">{{ moment(task.date).format("DD.MM.YYYY") }}</span>
+      <badge v-if="task.priority" :color="badgeColor"><span>{{ task.priority | capitalize }}</span></badge>
     </div>
   </div>
 </template>
