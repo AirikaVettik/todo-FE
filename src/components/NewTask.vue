@@ -13,7 +13,7 @@
     <div class="row mt-4">
       <div class="col">
         <label for="first_name" class="block text-sm font-medium text-gray-700">Date</label>
-        <datepicker class="block text-sm font-medium text-gray-700 p-1" :placeholder="getDateStr" v-model="form.date" monday-first full-month-name format></datepicker>
+        <datepicker class="block text-sm font-medium text-gray-700 p-1" monday-first full-month-name v-model="form.date"></datepicker>
       </div>
     </div>
     <div class="row mt-4">
@@ -54,7 +54,7 @@ export default {
     return {
       form: {
         title: '',
-        date: null,
+        date: new Date().toISOString().slice(0,10),
         priority: 'MEDIUM',
         color: 'GRAY'
       }
@@ -73,22 +73,17 @@ export default {
       };
       return mappings [this.form.priority] || mappings.default;
     },
-    getDateStr(){
-         return new Date().toLocaleDateString('en-GB', {day: "numeric" ,month: "long", year: "numeric",});
-      },
   },
   methods: { 
     async addTodo () {
       await axios({
-        url: 'api/createTask',
+        url: '/api/createTask',
         method: 'POST',
         data: this.form
       })
-      .then(() => {
-        window.location.reload()
-      })
-  }
-}}
+      .then (() =>
+        window.location.reload())
+}}}
 </script>
 <style scoped>
   .border-gray {
