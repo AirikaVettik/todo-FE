@@ -63,7 +63,7 @@ export default {
   methods: {
     async getTasks () {
       const getAllTasks = await axios({
-        url: 'api/all-tasks',
+        url: 'https://airika-todoapp.herokuapp.com/api/all-tasks',
         method: 'GET'
       })
       this.columns.push(getAllTasks.data[0])
@@ -73,13 +73,13 @@ export default {
       if (event.added) {
         if (column.title === 'Done') {
           await axios({
-            url: `api/moveTask/${event.added.element._id}/done`,
+            url: `https://airika-todoapp.herokuapp.com/api/moveTask/${event.added.element._id}/done`,
             method: 'GET'
           })
         }
         if (column.title === 'Todo') {
           await axios({
-            url: `api/moveTask/${event.added.element._id}/todo`,
+            url: `https://airika-todoapp.herokuapp.com/api/moveTask/${event.added.element._id}/todo`,
             method: 'GET'
           })
         }

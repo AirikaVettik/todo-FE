@@ -77,7 +77,7 @@ export default {
   methods: { 
     async addTodo () {
       await axios({
-        url: '/api/createTask',
+        url: 'https://airika-todoapp.herokuapp.com/api/createTask',
         method: 'POST',
         data: this.form
       })
