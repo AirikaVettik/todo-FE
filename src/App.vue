@@ -12,6 +12,7 @@
         <div
           v-for="column in columns"
           :key="column.title"
+          :column="column"
           class="bg-gray-100 rounded-lg px-3 py-3 column-width rounded mr-4"
         >
           <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">{{column.title}}</p>
@@ -29,6 +30,7 @@
               v-for="(task) in column.tasks"
               :key="task.id"
               :task="task"
+              @delete-task="deleteTask(task, column)"
               class="mt-3 cursor-move"
             ></task-card>
           </draggable>
@@ -82,10 +84,31 @@ export default {
             url: `https://airika-todoapp.herokuapp.com/api/moveTask/${event.added.element._id}/todo`,
             method: 'GET'
           })
+        }}
+    },
+
+    async deleteTask (task, column) {
+      console.log(task._id)
+      console.log(column.title);
+        if (column.title === 'Done') {
+          await axios({
+            url: `https://airika-todoapp.herokuapp.com/api/done-tasks/${task._id}`,
+            method: 'DELETE'
+          })
+          .then (() =>
+             window.location.reload())
         }
+        if (column.title === 'Todo') {
+          await axios({
+            url: `https://airika-todoapp.herokuapp.com/api/todo-tasks/${task._id}`,
+            method: 'DELETE'
+          })
+          .then (() =>
+            window.location.reload())
+          }
     }
-  }
-  }}
+    }
+}
 </script>
 
 <style scoped>
