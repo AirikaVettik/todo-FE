@@ -1,6 +1,16 @@
 <template>
   <div class="bg-white shadow rounded px-3 pt-3 pb-5 border border-white">
-    <div class="row">
+    <div class="row mt-4">
+      <div class="col text-right">
+      <input type="radio" id="allTasks" value="allTasks" v-model="checkedWhat">
+      <label for="allTasks"> Show all tasks! </label>
+      <input type="radio" id="myTasks" value="myTasks" v-model="checkedWhat">
+      <label for="myTasks"> Show my tasks! </label>
+      <br>
+      <span> Checked is: {{ checkedWhat }} </span>
+    </div>
+    </div>
+    <div class="row mt-4">
       <div class="col">
         <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
         <input
@@ -42,7 +52,7 @@
       <div class="col text-right">
         <button class="bg-green-400 px-4 py-2 rounded" @click="addTodo">Add todo</button>
       </div>
-    </div>
+  </div>
   </div>
 </template>
 <script>
@@ -56,8 +66,9 @@ export default {
         title: '',
         date: new Date().toISOString().slice(0,10),
         priority: 'MEDIUM',
-        color: 'GRAY'
-      }
+        color: 'GRAY',
+      },
+      checkedWhat: [],
     }
   },
   components: {
@@ -83,7 +94,9 @@ export default {
       })
       .then (() =>
         window.location.reload())
-}}}
+      }
+  }
+}
 </script>
 <style scoped>
   .border-gray {

@@ -1,7 +1,10 @@
 import Vue from "vue";
-import App from "./App.vue";
+import VueRouter from 'vue-router';
+import routes from './routes';
+import Master from "./components/layout/Master.vue"
 
 Vue.config.productionTip = false;
+Vue.use(VueRouter)
 
 import moment from "moment";
 Vue.prototype.moment = moment;
@@ -10,6 +13,14 @@ Vue.filter('capitalize', function (value) {
   return value[0].toUpperCase() + value.slice(1).toLowerCase()
 });
 
+const router = new VueRouter({
+  routes,
+  mode: 'history'
+})
+
 new Vue({
-  render: h => h(App)
-}).$mount("#app");
+  el: '#app',
+  router,
+  components: { Master },
+  template: '<Master/>'
+})
