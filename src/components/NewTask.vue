@@ -21,6 +21,8 @@
       </div>
     </div>
     <div class="row mt-4">
+       </div>
+    <div class="row mt-4">
       <div class="col">
         <label for="first_name" class="block text-sm font-medium text-gray-700">Date</label>
         <datepicker class="block text-sm font-medium text-gray-700 p-1" monday-first full-month-name v-model="form.date"></datepicker>
@@ -49,6 +51,10 @@
       </div>
     </div>
     <div class="row mt-5">
+    <div class="col">
+        <label for="createdBy" class="block text-sm font-medium text-gray-700">Created by </label>
+        <input name="createdBy" id="createdBy" :value="form.createdBy">
+      </div>
       <div class="col text-right">
         <button class="bg-green-400 px-4 py-2 rounded" @click="addTodo">Add todo</button>
       </div>
@@ -58,6 +64,7 @@
 <script>
 import axios from 'axios';
 import Datepicker from 'vuejs-datepicker';
+import { mapState } from 'vuex'
 
 export default {
   data () {
@@ -66,7 +73,8 @@ export default {
         title: '',
         date: new Date().toISOString().slice(0,10),
         priority: 'MEDIUM',
-        color: 'GRAY',
+        color: 'GRAY',  
+        createdBy: this.$store.state.createdBy
       },
       checkedWhat: [],
     }
@@ -83,7 +91,7 @@ export default {
         default: "teal"
       };
       return mappings [this.form.priority] || mappings.default;
-    },
+    }
   },
   methods: { 
     async addTodo () {
@@ -92,8 +100,8 @@ export default {
         method: 'POST',
         data: this.form
       })
-      .then (() =>
-        window.location.reload())
+        console.log(this.form)
+
       }
   }
 }

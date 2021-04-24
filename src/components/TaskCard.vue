@@ -8,6 +8,9 @@
       <span class="text-sm text-gray-600">{{ moment(task.date).format("DD.MMMM YYYY") }}</span>
       <badge v-if="task.priority" :color="badgeColor"><span>{{ task.priority | capitalize }}</span></badge>
     </div>
+    <div>
+    <p class="text-gray-700 pt-3 font-semibold font-sans tracking-wide text-sm"> Created by {{ task.createdBy }}</p>
+    </div>
   </div>
 </template>
 <script>
