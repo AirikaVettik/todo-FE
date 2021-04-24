@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from 'vue-router';
 import routes from './routes';
 import Master from "./components/layout/Master.vue"
+import store from "./store"
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter)
@@ -21,6 +22,7 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   router,
+  store,
   components: { Master },
   template: '<Master/>'
 })

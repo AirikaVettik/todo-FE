@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+  <div class="flex justify-center">
+  <p class="hello"> Hello, {{ $store.state.createdBy }}! What is your main focus for today?</p>
+  </div>
     <div class="flex justify-center">
       <div class="min-h-screen flex overflow-x-scroll py-12">
         <div class="bg-gray-100 rounded-lg px-3 py-3 column-double-width rounded mr-4">
@@ -126,5 +129,10 @@ export default {
     opacity: 0.5;
     background: #f7fafc;
     border: 1px solid #4299e1;
+  }
+
+ .hello {
+    font-size: 25px;
+    color: rgba(55, 65, 81, 0.7)
   }
 </style>

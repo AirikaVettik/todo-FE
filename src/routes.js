@@ -4,7 +4,7 @@ import LandingPage from './components/LandingPage'
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'TODO-APP',
     component: LandingPage
   },
   {

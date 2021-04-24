@@ -1,15 +1,13 @@
 <template>
   <div id="app">
     <ul class="nav">
-      <li><router-link :to="{ name: 'home' }">Home</router-link></li>
-      <li><router-link :to="{ name: 'todo' }">App</router-link></li>
+      <li><router-link :to="{ name: 'TODO-APP' }">TODO-APP</router-link></li>
     </ul>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-
 export default {
 }
 </script>
@@ -20,14 +18,7 @@ export default {
     margin: 0;
     padding: 0;
   }
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
-    font-size: 24px;
-    height: 100vh;
-  }
+
   .flex-center {
     display: flex;
     justify-content: center;
@@ -37,7 +28,7 @@ export default {
     list-style: none;
     padding: 15px 0;
     margin: 0;
-    justify-content: flex-end;
+    justify-content: center;
     background: #F5F8FA;
     border-bottom: 1px solid lightgrey;
     margin-bottom: 24px;
