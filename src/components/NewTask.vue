@@ -4,12 +4,14 @@
       <div class="col text-right">
       <input type="radio" id="allTasks" value="allTasks" v-model="checkedWhat">
       <label for="allTasks"> Show all tasks! </label>
-      <input type="radio" id="myTasks" value="myTasks" v-model="checkedWhat">
-      <label for="myTasks"> Show my tasks! </label>
+      <input type="radio" id="myTasks" value="myTasks"  v-model="checkedWhat">
+      <label for="myTasks"> Show {{form.createdBy}}'s tasks! </label>
       <br>
       <span> Checked is: {{ checkedWhat }} </span>
     </div>
     </div>
+
+
     <div class="row mt-4">
       <div class="col">
         <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
@@ -77,6 +79,7 @@ export default {
         createdBy: this.$store.state.createdBy
       },
       checkedWhat: [],
+      checkedWhat: "myTasks",
     }
   },
   components: {
@@ -101,7 +104,6 @@ export default {
         data: this.form
       })
         console.log(this.form)
-
       }
   }
 }

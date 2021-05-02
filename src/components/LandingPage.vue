@@ -16,7 +16,10 @@
     
         <div class="row mt-5">
             <div class="col text-center">
-            <button @click="$router.push('todo')" class="bg-green-400 px-4 py-2 rounded">Submit name</button>
+            <button 
+            @click="$router.push('todo')" 
+            class="bg-green-400 px-4 py-2 rounded"
+            >Submit name</button>
             </div>
         </div>
     </div> 

@@ -33,7 +33,7 @@
               v-for="(task) in column.tasks"
               :key="task.id"
               :task="task"
-              @delete-task="deleteTask(task, column)"
+              @task-deleted="deleteTask($event, task, column)"
               class="mt-3 cursor-move"
             ></task-card>
           </draggable>
@@ -90,7 +90,7 @@ export default {
         }}
     },
 
-    async deleteTask (task, column) {
+    async deleteTask (event, task, column) {
       console.log(task._id)
       console.log(column.title);
         if (column.title === 'Done') {
@@ -99,8 +99,8 @@ export default {
             method: 'DELETE'
           })
           .then (() =>
-             window.location.reload())
-        }
+            window.location.reload())
+          }
         if (column.title === 'Todo') {
           await axios({
             url: `https://airika-todoapp.herokuapp.com/api/todo-tasks/${task._id}`,
