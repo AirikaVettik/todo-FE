@@ -7,8 +7,9 @@
       <div class="col">
         <label for="priority" class="inline-block text-sm font-medium text-gray-700">File type</label>
         <select v-model="form.fileType" name="priority" class="mt-1 block w-full border-gray p-1">
-          <option value="XLSX">XSLX</option>
           <option value="PDF">PDF</option>
+          <option value="XLSX">XSLX</option>
+          
         </select>
       </div>
     </div>
@@ -16,19 +17,15 @@
     <div class="row mt-3">
       <div class="col">
           <label for="priority" class="inline-block text-sm font-medium text-gray-700">Statuses to include in the file</label> <br><br>
-          <input type="checkbox" id="ToDo" value="ToDo" v-model="checked">
+          <input type="checkbox" id="ToDo" value="ToDo" v-model="form.todo">
           <label for="todo"> Todo </label> <br>
-          <input type="checkbox" id="Done" value="Done"  v-model="checked">
+          <input type="checkbox" id="Done" value="Done"  v-model="form.done">
           <label for="done"> Done </label>
         <br>
       </div>
 </div>
 
     <div class="row mt-5">
-    <div class="col">
-        <label for="checked" class="block text-sm font-medium text-gray-700">Checked is: {{ checked }} </label>
-        <input name="checked" id="checked">
-      </div>
       <div class="col text-right">
         <button class="bg-green-400 px-4 py-2 rounded" v-on:click="getFile">Download</button>
       </div>
@@ -43,10 +40,9 @@ export default {
     return {
       form: {
         fileType: 'PDF',
-        todo: false,
-        done: false
-      },
-      checked: [],
+        todo: true,
+        done: true
+      }
     }
   },
   methods: {
