@@ -58,7 +58,7 @@
         <input name="createdBy" id="createdBy" :value="form.createdBy">
       </div>
       <div class="col text-right">
-        <button class="bg-green-400 px-4 py-2 rounded" @click="addTodo">Add todo</button>
+        <button class="bg-green-400 px-4 py-2 rounded" v-on:click="addTodo">Add todo</button>
       </div>
   </div>
   </div>
@@ -94,15 +94,22 @@ export default {
         default: "teal"
       };
       return mappings [this.form.priority] || mappings.default;
+    },
+    
+    filteredtask() {
+      return this.tasks.filter((task) => {
+        return this.form.createdBy.match(this.form.createdBy)
+      })
     }
   },
   methods: { 
-    async addTodo () {
+    async addTodo (form) {
       await axios({
         url: 'https://airika-todoapp.herokuapp.com/api/createTask',
         method: 'POST',
         data: this.form
       })
+        this.$emit('task-added')
         console.log(this.form)
       }
   }

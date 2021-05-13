@@ -3,13 +3,16 @@
   <div class="flex justify-center">
   <p class="hello"> Hello, {{ $store.state.createdBy }}! What is your main focus for today?</p>
   </div>
+
     <div class="flex justify-center">
       <div class="min-h-screen flex overflow-x-scroll py-12">
         <div class="bg-gray-100 rounded-lg px-3 py-3 column-double-width rounded mr-4">
           <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">Add new todo</p>
-          <new-task class="my-3" @task-added="getTasks"/>
-        </div>
-      </div>
+          <new-task class="my-3" v-on:task-added="getTasks"/>
+          <br>
+          <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">Download file(s)</p>
+        <DownloadFile class="my-3"/>
+      </div></div>
 
       <div class="min-h-screen flex overflow-x-scroll py-12">
         <div
@@ -41,6 +44,7 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -48,13 +52,15 @@ import draggable from "vuedraggable";
 import TaskCard from "./components/TaskCard.vue";
 import NewTask from "./components/NewTask.vue";
 import axios from 'axios';
+import DownloadFile from './components/DownloadFile.vue'
 
 export default {
   name: "App",
   components: {
     TaskCard,
     draggable,
-    NewTask
+    NewTask,
+    DownloadFile
   },
   data() {
     return {
