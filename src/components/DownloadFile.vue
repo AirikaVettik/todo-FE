@@ -48,7 +48,7 @@ export default {
   methods: {
     async getFile () {
       await axios({
-        url: 'api/downloadFile',
+        url: 'http://localhost:3001/api/downloadFile',
         method: 'POST',
         data: this.form,
         responseType: 'arraybuffer'

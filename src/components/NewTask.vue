@@ -109,7 +109,6 @@ export default {
         method: 'POST',
         data: this.form
       })
-        this.$emit('task-added')
         console.log(this.form)
       }
   }
