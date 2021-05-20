@@ -72,11 +72,11 @@ export default {
   data () {
     return {
       form: {
-        title: '',
+        title: "",
         date: new Date().toISOString().slice(0,10),
         priority: 'MEDIUM',
         color: 'GRAY',  
-        createdBy: this.$store.state.createdBy
+        createdBy: this.$store.state.createdBy,
       },
       checkedWhat: [],
       checkedWhat: "myTasks",
@@ -91,7 +91,7 @@ export default {
         HIGH: "red",
         MEDIUM: "yellow",
         LOW: "green",
-        default: "teal"
+        default: "teal",
       };
       return mappings [this.form.priority] || mappings.default;
     },
@@ -108,9 +108,11 @@ export default {
         url: 'https://airika-todoapp.herokuapp.com/api/createTask',
         method: 'POST',
         data: this.form
-      })
+      }) 
+        this.$emit("task-added");
         console.log(this.form)
       }
+    
   }
 }
 </script>

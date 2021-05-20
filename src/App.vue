@@ -8,7 +8,7 @@
       <div class="min-h-screen flex overflow-x-scroll py-12">
         <div class="bg-gray-100 rounded-lg px-3 py-3 column-double-width rounded mr-4">
           <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">Add new todo</p>
-          <new-task class="my-3" v-on:task-added="getTasks"/>
+          <new-task class="my-3" @task-added="getTasks"/>
           <br>
           <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">Download file(s)</p>
         <DownloadFile class="my-3"/>
@@ -36,7 +36,7 @@
               v-for="(task) in column.tasks"
               :key="task.id"
               :task="task"
-              @task-deleted="deleteTask($event, task, column)"
+              @task-deleted="getTasks"
               class="mt-3 cursor-move"
             ></task-card>
           </draggable>
@@ -65,6 +65,14 @@ export default {
   data() {
     return {
       columns: [
+        {
+          title: "Todo",
+          tasks: [],
+        },
+        {
+          title: "Done",
+          tasks: [],
+        },
       ]
     };
   },
@@ -73,12 +81,11 @@ export default {
   },
   methods: {
     async getTasks () {
-      const getAllTasks = await axios({
+      const res = await axios({
         url: 'https://airika-todoapp.herokuapp.com/api/all-tasks',
         method: 'GET'
       })
-      this.columns.push(getAllTasks.data[0])
-      this.columns.push(getAllTasks.data[1])
+      this.columns = res.data;
     },
     async moveTask (event, column) {
       if (event.added) {
@@ -95,27 +102,6 @@ export default {
           })
         }}
     },
-
-    async deleteTask (event, task, column) {
-      console.log(task._id)
-      console.log(column.title);
-        if (column.title === 'Done') {
-          await axios({
-            url: `https://airika-todoapp.herokuapp.com/api/done-tasks/${task._id}`,
-            method: 'DELETE'
-          })
-          .then (() =>
-            window.location.reload())
-          }
-        if (column.title === 'Todo') {
-          await axios({
-            url: `https://airika-todoapp.herokuapp.com/api/todo-tasks/${task._id}`,
-            method: 'DELETE'
-          })
-          .then (() =>
-            window.location.reload())
-          }
-    }
     }
 }
 </script>
