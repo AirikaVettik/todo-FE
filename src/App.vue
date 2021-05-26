@@ -139,7 +139,6 @@ export default {
             method: 'DELETE',
             data: this.task,
           })
-          this.$emit(getMyTasks())
           }
         if (column.title === 'Todo') {
           await axios({
@@ -147,13 +146,8 @@ export default {
             method: 'DELETE',
             data: this.task,
           })
-          this.$emit("task-added")
           }
     },
-    async onChange(event) {
-              var optionText = event.target.value;
-              console.log(optionText);
-    }
 }}
 </script>
 
