@@ -1,5 +1,23 @@
 <template>
   <div id="app">
+      <div class="row mt-4">
+      <div class="col text-center">
+      <input type="radio" 
+          id="allTasks" 
+          value="allTasks" 
+          v-model="checkedIS"
+          @change="getAllTasks($event)">
+      <label for="allTasks"> Show all tasks! </label>
+      <input type="radio" 
+          id="myTasks" 
+          value="myTasks"  
+          v-model="checkedIS"
+          @change="getMyTasks($event)">
+      <label for="myTasks"> Show my tasks! </label>
+      </div>
+      </div>
+
+      <br><br>
   <div class="flex justify-center">
   <p class="hello"> Hello, {{ $store.state.createdBy }}! What is your main focus for today?</p>
   </div>
@@ -8,7 +26,7 @@
       <div class="min-h-screen flex overflow-x-scroll py-12">
         <div class="bg-gray-100 rounded-lg px-3 py-3 column-double-width rounded mr-4">
           <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">Add new todo</p>
-          <new-task class="my-3" @task-added="getTasks"/>
+          <new-task class="my-3" @task-added="getMyTasks"/>
           <br>
           <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">Download file(s)</p>
         <DownloadFile class="my-3"/>
@@ -36,7 +54,7 @@
               v-for="(task) in column.tasks"
               :key="task.id"
               :task="task"
-              @task-deleted="getTasks"
+              @task-deleted="deleteTask(task, column)"
               class="mt-3 cursor-move"
             ></task-card>
           </draggable>
@@ -73,19 +91,29 @@ export default {
           title: "Done",
           tasks: [],
         },
-      ]
+      ],
+      checkedIS: "myTasks"
     };
   },
   async created () {
-    await this.getTasks()
+    await this.getMyTasks()
   },
   methods: {
-    async getTasks () {
-      const res = await axios({
-        url: 'https://airika-todoapp.herokuapp.com/api/all-tasks',
+    async getMyTasks(event) {
+      console.log(this.$store.state.createdBy)
+      const myTasks = await axios({
+        url: `https://airika-todoapp.herokuapp.com/api/all-tasks/${this.$store.state.createdBy}`,
         method: 'GET'
       })
-      this.columns = res.data;
+      this.columns = myTasks.data;
+    },
+    async getAllTasks(event) {
+      console.log(this.$store.state.createdBy)
+      const allTasks = await axios({
+        url: `https://airika-todoapp.herokuapp.com/api/all-tasks`,
+        method: 'GET'
+      })
+      this.columns = allTasks.data;
     },
     async moveTask (event, column) {
       if (event.added) {
@@ -102,8 +130,31 @@ export default {
           })
         }}
     },
+    async deleteTask (task, column) {
+      console.log(task._id)
+      console.log(column.title);
+        if (column.title === 'Done') {
+          await axios({
+            url: `https://airika-todoapp.herokuapp.com/api/done-tasks/${task._id}`,
+            method: 'DELETE',
+            data: this.task,
+          })
+          this.$emit(getMyTasks())
+          }
+        if (column.title === 'Todo') {
+          await axios({
+            url: `https://airika-todoapp.herokuapp.com/api/todo-tasks/${task._id}`,
+            method: 'DELETE',
+            data: this.task,
+          })
+          this.$emit("task-added")
+          }
+    },
+    async onChange(event) {
+              var optionText = event.target.value;
+              console.log(optionText);
     }
-}
+}}
 </script>
 
 <style scoped>

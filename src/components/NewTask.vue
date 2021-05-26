@@ -1,18 +1,6 @@
 <template>
   <div class="bg-white shadow rounded px-3 pt-3 pb-5 border border-white">
     <div class="row mt-4">
-      <div class="col text-right">
-      <input type="radio" id="allTasks" value="allTasks" v-model="checkedWhat">
-      <label for="allTasks"> Show all tasks! </label>
-      <input type="radio" id="myTasks" value="myTasks"  v-model="checkedWhat">
-      <label for="myTasks"> Show {{form.createdBy}}'s tasks! </label>
-      <br>
-      <span> Checked is: {{ checkedWhat }} </span>
-    </div>
-    </div>
-
-
-    <div class="row mt-4">
       <div class="col">
         <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
         <input
@@ -58,7 +46,7 @@
         <input name="createdBy" id="createdBy" :value="form.createdBy">
       </div>
       <div class="col text-right">
-        <button class="bg-green-400 px-4 py-2 rounded" v-on:click="addTodo">Add todo</button>
+        <button class="bg-green-400 px-4 py-2 rounded" @click="addTodo()">Add todo</button>
       </div>
   </div>
   </div>
@@ -78,9 +66,7 @@ export default {
         color: 'GRAY',  
         createdBy: this.$store.state.createdBy,
       },
-      checkedWhat: [],
-      checkedWhat: "myTasks",
-    }
+    } 
   },
   components: {
     Datepicker
@@ -95,24 +81,25 @@ export default {
       };
       return mappings [this.form.priority] || mappings.default;
     },
-    
-    filteredtask() {
-      return this.tasks.filter((task) => {
-        return this.form.createdBy.match(this.form.createdBy)
-      })
-    }
   },
   methods: { 
-    async addTodo (form) {
+    async addTodo () {
       await axios({
         url: 'https://airika-todoapp.herokuapp.com/api/createTask',
         method: 'POST',
-        data: this.form
+        data: this.form,
       }) 
         this.$emit("task-added");
+        this.form = {
+          title: "",
+          date:  new Date().toISOString().slice(0,10),
+          priority: "MEDIUM",
+          color: "GRAY",
+          createdBy: this.$store.state.createdBy,
+      };
         console.log(this.form)
-      }
-    
+      },
+          
   }
 }
 </script>
