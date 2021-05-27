@@ -63,6 +63,7 @@ export default {
             method: 'POST',
             data: data,
         }) 
+            
             this.$router.push('todo');
             console.log(data)
         }
