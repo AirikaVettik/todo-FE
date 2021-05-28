@@ -46,7 +46,7 @@ export default {
   methods: {
     async getFile () {
       await axios({
-        url: 'api/downloadFile',
+        url: 'https://airika-todoapp.herokuapp.com/api/downloadFile',
         method: 'POST',
         data: this.form,
         responseType: 'arraybuffer'
