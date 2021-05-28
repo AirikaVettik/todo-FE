@@ -1,6 +1,4 @@
 <template>
-
-
     <div class="bg-white shadow rounded px-3 pt-3 pb-5 border border-white">
     <div class="row mt-3">
   

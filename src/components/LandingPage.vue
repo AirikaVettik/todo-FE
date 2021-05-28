@@ -81,6 +81,7 @@ export default {
   }
   .container {
     min-width: 560px;
-    width: 560px
+    width: 560px;
+    text-align: center
   }
 </style>

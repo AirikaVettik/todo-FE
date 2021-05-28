@@ -6,12 +6,14 @@ Vue.use(Vuex)
 export default new Vuex.Store ({
     state: {
         createdBy: "",
-        user: null
     },
     getters: {
 
     },
     mutations: {
+        selectedName(state, button) {
+            state.createdBy = button
+        }
 
     },
     actions: {

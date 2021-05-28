@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <ul class="nav">
-      <li><router-link :to="{ name: 'TODO-APP' }">TODO-APP</router-link></li>
+      <li><router-link to="/" @click="window.location.reload()">TODO-APP</router-link></li>
     </ul>
       <br>
     <router-view></router-view>
