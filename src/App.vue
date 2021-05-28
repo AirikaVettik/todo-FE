@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+  <ul class="nav">
+      <a :href="$router.resolve({name: 'TODO-APP'}).href">GO BACK TO CHANGE NAME</a>
+    </ul>
       <div class="row mt-4">
       <div class="col text-center">
       <input type="radio" 
