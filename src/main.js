@@ -8,6 +8,7 @@ Vue.config.productionTip = false;
 Vue.use(VueRouter)
 
 import moment from "moment";
+import './registerServiceWorker'
 Vue.prototype.moment = moment;
 
 Vue.filter('capitalize', function (value) {
