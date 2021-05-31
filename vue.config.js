@@ -13,11 +13,7 @@ module.exports = {
         changeOrigin: true
       }
     }
-  }
-}
-
-
-/* ,et teie rakendusel see tailwind osa töötaks siis on vaja vue.config.js faili lisada see conf 
+  },
   pwa: {
     workboxOptions: {
       runtimeCaching: [
@@ -33,7 +29,6 @@ module.exports = {
         }
       ]
     },
-    staticFileGlobs: ['dist/**/
-    /* *.{js,html,css,png,svg}']
-    https://www.webnoob.dev/articles/turn-your-vue-web-app-into-a-pwa
-  }  */
+    staticFileGlobs: ['dist/**/* *.{js,html,css,png,svg}']
+  },
+}
