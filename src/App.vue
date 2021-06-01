@@ -103,7 +103,6 @@ export default {
   },
   methods: {
     async getMyTasks(event) {
-      console.log(this.$store.state.createdBy)
       const myTasks = await axios({
         url: `https://airika-todoapp.herokuapp.com/api/all-tasks/${this.$store.state.createdBy}`,
         method: 'GET'
@@ -111,7 +110,6 @@ export default {
       this.columns = myTasks.data;
     },
     async getAllTasks(event) {
-      console.log(this.$store.state.createdBy)
       const allTasks = await axios({
         url: `https://airika-todoapp.herokuapp.com/api/all-tasks`,
         method: 'GET'
@@ -134,14 +132,13 @@ export default {
         }}
     },
     async deleteTask (task, column) {
-      console.log(task._id)
-      console.log(column.title);
         if (column.title === 'Done') {
           await axios({
             url: `https://airika-todoapp.herokuapp.com/api/done-tasks/${task._id}`,
             method: 'DELETE',
             data: this.task,
           })
+          this.$emit("task-deleted");
           }
         if (column.title === 'Todo') {
           await axios({
@@ -149,6 +146,7 @@ export default {
             method: 'DELETE',
             data: this.task,
           })
+          this.$emit("task-deleted")
           }
     },
 }}

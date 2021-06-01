@@ -54,7 +54,6 @@ export default {
             let user = {
                 createdBy: this.$store.state.createdBy
             }
-            console.log(user);
             this.createUser(user)
         },
         async createUser (data) {
@@ -63,14 +62,9 @@ export default {
             method: 'POST',
             data: data,
         }) 
-            
             this.$router.push('todo');
-            console.log(data)
-        }
-        },
-          
-  }
-
+        }},
+}
 </script>
 
 

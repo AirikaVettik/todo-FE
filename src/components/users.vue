@@ -36,14 +36,10 @@ export default {
         const res = await axios({
             url: `https://airika-todoapp.herokuapp.com/api/all-users/`,
             method: 'GET'
-
         })
-        this.users = res.data.[0]
-        console.log(this.users)
+            this.users = res.data.[0]
         },
-    
         async getUser(user) {
-            console.log(user)
            this.$router.push('todo')
         },
     }
