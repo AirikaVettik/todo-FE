@@ -7,7 +7,7 @@
       <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">
         {{ task.title }}
       </p>
-      <button class="deleteButton" @click.prevent="$emit('task-deleted', task)">
+      <button class="deleteButton" @click.prevent="$emit('task-deleted', task.id, task.index)">
         X
       </button>
     </div>

@@ -57,7 +57,7 @@
               v-for="(task) in column.tasks"
               :key="task.id"
               :task="task"
-              @task-deleted="deleteTask(task, column)"
+              @task-deleted="deleteTask(task, column, index)"
               class="mt-3 cursor-move"
             ></task-card>
           </draggable>
@@ -131,22 +131,20 @@ export default {
           })
         }}
     },
-    async deleteTask (task, column) {
+    async deleteTask (task, column, index) {
         if (column.title === 'Done') {
           await axios({
             url: `https://airika-todoapp.herokuapp.com/api/done-tasks/${task._id}`,
-            method: 'DELETE',
-            data: this.task,
+            method: 'DELETE'
           })
-          this.$emit("task-deleted");
+            await this.getMyTasks();
           }
         if (column.title === 'Todo') {
           await axios({
             url: `https://airika-todoapp.herokuapp.com/api/todo-tasks/${task._id}`,
-            method: 'DELETE',
-            data: this.task,
+            method: 'DELETE'
           })
-          this.$emit("task-deleted")
+            await this.getMyTasks();
           }
     },
 }}
